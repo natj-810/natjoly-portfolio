@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Home | Natalie Joly Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --gold: #c9a84c;
+      --gold-light: #e8d49e;
+      --grey-bg: #f5f4f0;
+      --grey-mid: #888;
+      --section-pad: 80px 40px;
+      --max-w: 1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--black); background: var(--white); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--black);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+    }
+    .nav-logo img { height: 48px; object-fit: contain; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-phone { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; }
+    .nav-social { display: flex; gap: 14px; align-items: center; }
+    .nav-social a { color: var(--white); opacity: 0.7; transition: opacity 0.2s; }
+    .nav-social a:hover { opacity: 1; }
+    .nav-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 60px;
+      padding: 100px 40px;
+      max-width: 100%; overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, #2a2a1a 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; }
+    .hero-sub { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; margin-bottom: 18px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 28px; font-size: 0.88rem; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.5); color: var(--white); background: transparent; }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+    .hero-img { position: relative; display: flex; justify-content: center; }
+    .hero-img img { width: 100%; max-width: 420px; border-radius: 4px; object-fit: cover; }
+    .hero-img-profile {
+      position: absolute; bottom: -30px; left: 0;
+      width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+      border: 4px solid var(--gold); background: var(--black);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: var(--section-pad); }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 40px; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--grey-bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .about-col h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--gold-light); padding-bottom: 6px; }
+    .about-col ul { list-style: none; }
+    .about-col ul li { font-size: 0.88rem; padding: 5px 0; border-bottom: 1px solid #e5e2da; color: #333; }
+    .about-img img { width: 100%; border-radius: 4px; object-fit: cover; }
+    .resume-btn-wrap { margin-top: 32px; }
+    .btn-dark { background: var(--black); color: var(--white); }
+    .btn-dark:hover { background: #333; }
+
+    /* ── PROJECTS ── */
+    .projects { background: var(--white); }
+    .projects-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .projects-text p { color: #444; margin-bottom: 16px; font-size: 0.95rem; }
+    .projects-text ul { list-style: none; margin: 16px 0 28px; }
+    .projects-text ul li { padding: 6px 0 6px 20px; position: relative; color: #333; font-size: 0.92rem; border-bottom: 1px solid #eee; }
+    .projects-text ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+    .projects-img img { width: 100%; border-radius: 4px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--black); color: var(--white); }
+    .testimonials .eyebrow { color: var(--gold-light); }
+    .testimonials h2.section-title { color: var(--white); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 36px; }
+    .testi-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 6px; padding: 28px 24px;
+    }
+    .testi-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 4px; }
+    .testi-card .role { font-size: 0.78rem; color: var(--gold-light); margin-bottom: 16px; line-height: 1.4; }
+    .testi-card p { font-size: 0.875rem; color: rgba(255,255,255,0.82); line-height: 1.7; }
+    .testi-link { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; }
+    .testi-link:hover { text-decoration: underline; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--grey-bg); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .contact h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+    .contact p { color: #555; font-size: 0.92rem; margin-bottom: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #333; letter-spacing: 0.05em; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1.5px solid #ddd;
+      border-radius: 3px; font-family: inherit; font-size: 0.9rem;
+      transition: border-color 0.2s; background: var(--white);
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .contact-info { font-size: 0.9rem; color: #444; }
+    .contact-info p { margin-bottom: 8px; }
+    .contact-info a { color: var(--black); }
+    .contact-info .social-links { display: flex; gap: 14px; margin-top: 16px; }
+    .contact-info .social-links a { color: var(--black); opacity: 0.6; transition: opacity 0.2s; }
+    .contact-info .social-links a:hover { opacity: 1; }
+    .contact-info .social-links svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 30px 40px;
+      font-size: 0.82rem;
+    }
+    footer img { height: 40px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { flex-wrap: wrap; height: auto; padding: 14px 20px; gap: 10px; }
+      .nav-links { gap: 18px; }
+      .hero, .about-grid, .projects-layout, .testi-grid, .contact-layout { grid-template-columns: 1fr; }
+      .hero { padding: 60px 24px; }
+      .hero-img { margin-top: 40px; }
+      .hero-img-profile { display: none; }
+      section { padding: 60px 24px; }
+      .about-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://natjolyportfolio.com/ws/media-library/d9bf87a20d9e441faf4ca39b59f50702/nj-portfolio-logo-_black-background_zoom.png" alt="NJ Portfolio Logo" />
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="featured-projects.html">Featured Projects</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-phone">0410 341 744</span>
+  <div class="nav-social">
+    <a href="https://www.linkedin.com/in/natalie-joly-85975412/" target="_blank" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452H16.89v-5.569c0-1.327-.024-3.037-1.851-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.348V9h3.414v1.561h.048c.476-.9 1.637-1.851 3.368-1.851 3.6 0 4.267 2.369 4.267 5.455v6.287zM5.337 7.433a1.983 1.983 0 1 1 0-3.966 1.983 1.983 0 0 1 0 3.966zm1.707 13.019H3.63V9h3.414v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/natalie.joly1" target="_blank" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    </a>
+    <a href="mailto:njoly2@bigpond.com" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-sub">specialising in customised learning experiences</p>
+    <h1>Instructional Design &amp; Training Delivery Specialist</h1>
+    <div class="hero-btns">
+      <a href="featured-projects.html" class="btn btn-gold">Featured Projects</a>
+      <a href="#contact" class="btn btn-outline">Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Learning illustration" />
+    <img class="hero-img-profile" src="https://natjolyportfolio.com/ws/media-library/92e3ceea451046a6bc4df16506e01441/351454507_214269948141727_2704307808983606062_n.jpg" alt="Natalie Joly" />
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="container">
+    <p class="eyebrow">here is a summary of my</p>
+    <h2 class="section-title">20+ years in Learning &amp; Development</h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-cols">
+          <div class="about-col">
+            <h4>Industry</h4>
+            <ul>
+              <li>Government, private and non-profit organisations</li>
+              <li>Health &amp; Hospital</li>
+              <li>Aviation</li>
+              <li>Building &amp; Construction</li>
+              <li>VET sector education</li>
+              <li>Disability &amp; Community</li>
+            </ul>
+          </div>
+          <div class="about-col">
+            <h4>Clients / Employers</h4>
+            <ul>
+              <li>NSW Department of Education</li>
+              <li>Virgin Australia</li>
+              <li>QBuild (Dept EPW)</li>
+              <li>CPL (Choice, Passion, Life)</li>
+              <li>eHealth (NSW Health)</li>
+              <li>Toyota Financial Services</li>
+              <li>YourTown</li>
+              <li>NRMA (IAG Group)</li>
+              <li>Thrifty Car Rentals</li>
+            </ul>
+          </div>
+          <div class="about-col">
+            <h4>Design Tools</h4>
+            <ul>
+              <li>Articulate 360 (Storyline, Rise, Peek)</li>
+              <li>Captivate</li>
+              <li>Camtasia</li>
+              <li>VideoScribe / Vyond</li>
+              <li>Filmora / Wondershare</li>
+              <li>SharePoint</li>
+              <li>Numerous in-house LMS systems</li>
+            </ul>
+          </div>
+          <div class="about-col">
+            <h4>Design &amp; Delivery Skillset</h4>
+            <ul>
+              <li>Detailed Training Needs Analysis</li>
+              <li>SME &amp; Specialist Consultation</li>
+              <li>Design scope of learning projects</li>
+              <li>Storyboarding</li>
+              <li>Program and session design</li>
+              <li>Delivery to small and large groups</li>
+              <li>VET delivery and assessment</li>
+              <li>Program evaluation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="resume-btn-wrap">
+          <a href="https://natjolyportfolio.com/ws/media-library/e1132ad87e7193477ea54891655328bd/natalie-joly-resume_aug2025.pdf" class="btn btn-dark" target="_blank">Download my Resume</a>
+        </div>
+      </div>
+      <div class="about-img">
+        <img src="https://natjolyportfolio.com/ws/blocks/about-splitscreen-with-media/images/image-1.ws-intense-next-private-tutor.jpg" alt="Learning & Development" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+  <div class="container">
+    <div class="projects-layout">
+      <div class="projects-text">
+        <p class="eyebrow">A brief overview of some of my</p>
+        <h2 class="section-title">Featured Projects:</h2>
+        <p>I have had the opportunity to work on some amazing learning projects, too many to list! I've chosen to highlight three customised projects here to give you an overview of my varied experience across design (including eLearning) and delivery in very different organisations.</p>
+        <p>Click below to read more about:</p>
+        <ul>
+          <li>Leadership programs at Virgin Australia, Ground Operations</li>
+          <li>Culture Conversations Series for QBuild and Dept EPW</li>
+          <li>OCA eLearning for the QBuild Regional and Delivery teams</li>
+        </ul>
+        <a href="featured-projects.html" class="btn btn-gold">Featured Projects</a>
+      </div>
+      <div class="projects-img">
+        <img src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Projects" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <p class="eyebrow">see what others are saying</p>
+    <h2 class="section-title">Testimonials</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <h4>Renee Tunney</h4>
+        <p class="role">Communication Manager, Department of Energy and Public Works</p>
+        <p>In 2021 I worked with Natalie on a seven-month project to build a safe, positive and respectful work environment among 1500 staff. The online learning modules that Natalie created were key to the success of this award-winning project which engaged staff on topics including unconscious bias and bullying and harassment. Natalie goes above and beyond and I hope I get the chance to work with her again someday.</p>
+      </div>
+      <div class="testi-card">
+        <h4>Lidia Calabrese</h4>
+        <p class="role">Instructional Designer at NATA Australia</p>
+        <p>Natalie is a people magnet — a fantastic skill for a facilitator and learning consultant. We worked together on a very challenging project and I was always impressed by her ability to stay calm under pressure and keep smiling. Natalie can build rapport with anyone and has just the right mix of professionalism and friendliness — and a genuine interest in supporting learners to achieve their goals.</p>
+      </div>
+      <div class="testi-card">
+        <h4>Deana Hatzisevastos</h4>
+        <p class="role">Senior Guardian at NSW Trustee &amp; Guardian</p>
+        <p>Natalie is a wonderful woman. She is highly intelligent, warm and leads by example of strength. Possesses experience and knowledge far surpassing her peers and can be trusted with projects full of responsibilities. Nat is great at her profession and passionate about the team environment. A dynamic leader and glad to have worked with Nat years ago.</p>
+      </div>
+    </div>
+    <a href="https://www.linkedin.com/in/natalie-joly-85975412/" target="_blank" class="testi-link">See more testimonials on LinkedIn →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-layout">
+      <div>
+        <h3>Send a message</h3>
+        <p>You can enter your details below to get in touch, or message me on <a href="https://www.linkedin.com/in/natalie-joly-85975412/">LinkedIn</a>.</p>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Your message…"></textarea>
+        </div>
+        <button class="btn btn-gold" onclick="alert('Thank you! Please email njoly2@bigpond.com directly to send your message.')">Submit</button>
+      </div>
+      <div class="contact-info">
+        <h3>Get in touch</h3>
+        <p>Want to chat about how we can work together to design a customised learning program for your team? Please don't hesitate to get in touch.</p>
+        <p>📍 Brisbane, QLD, Australia</p>
+        <p>📞 <strong>0410 341 744</strong></p>
+        <p>✉️ <a href="mailto:njoly2@bigpond.com">njoly2@bigpond.com</a></p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/natalie-joly-85975412/" target="_blank" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452H16.89v-5.569c0-1.327-.024-3.037-1.851-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.348V9h3.414v1.561h.048c.476-.9 1.637-1.851 3.368-1.851 3.6 0 4.267 2.369 4.267 5.455v6.287zM5.337 7.433a1.983 1.983 0 1 1 0-3.966 1.983 1.983 0 0 1 0 3.966zm1.707 13.019H3.63V9h3.414v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/natalie.joly1" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="mailto:njoly2@bigpond.com" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://natjolyportfolio.com/ws/media-library/d9bf87a20d9e441faf4ca39b59f50702/nj-portfolio-logo-_black-background_zoom.png" alt="NJ Portfolio Logo" />
+  natjolyportfolio.com
+</footer>
+
+</body>
+</html>

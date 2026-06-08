@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Featured Projects | Natalie Joly Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #111111; --white: #ffffff; --gold: #c9a84c; --gold-light: #e8d49e;
+      --grey-bg: #f5f4f0; --max-w: 1000px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--black); background: var(--white); line-height: 1.7; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100; background: var(--black);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+    }
+    .nav-logo img { height: 48px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-phone { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: var(--black); color: var(--white);
+      padding: 80px 40px 60px; text-align: center;
+    }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
+    .page-hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; }
+
+    /* QUICK LINKS */
+    .quick-links { background: var(--grey-bg); padding: 40px; }
+    .quick-links .container { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+    .ql-card { background: var(--white); border: 1px solid #e0ddd4; border-radius: 4px; padding: 18px; }
+    .ql-card .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+    .ql-card h4 { font-size: 0.88rem; font-weight: 600; line-height: 1.35; margin-bottom: 4px; }
+    .ql-card p { font-size: 0.78rem; color: #777; }
+
+    /* PROJECT SECTION */
+    .project { padding: 80px 40px; border-bottom: 1px solid #eee; }
+    .project:nth-child(even) { background: var(--grey-bg); }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.72rem; font-weight: 700; margin-bottom: 8px; }
+    h2.proj-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 4px; }
+    .proj-org { color: #666; font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
+    .proj-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .proj-body.full { grid-template-columns: 1fr; }
+    .proj-text p { color: #444; margin-bottom: 14px; font-size: 0.93rem; }
+    .highlights { background: var(--black); color: var(--white); border-radius: 6px; padding: 28px; }
+    .highlights h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 16px; font-weight: 700; }
+    .highlight-item { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .highlight-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .highlight-item strong { display: block; font-size: 0.88rem; color: var(--gold-light); margin-bottom: 4px; }
+    .highlight-item span { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .badge { display: inline-block; background: var(--gold); color: var(--black); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .proj-img { border-radius: 6px; overflow: hidden; }
+    .proj-img img { width: 100%; display: block; border-radius: 6px; }
+
+    /* SLIDESHOW */
+    .slideshow { position: relative; border-radius: 6px; overflow: hidden; background: #111; }
+    .slides { display: flex; transition: transform 0.4s ease; }
+    .slides img { min-width: 100%; width: 100%; object-fit: contain; max-height: 380px; background: #111; }
+    .slide-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.6); color: #fff; border: none;
+      padding: 12px 16px; cursor: pointer; font-size: 1.1rem; border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .slide-btn:hover { background: var(--gold); color: var(--black); }
+    .slide-prev { left: 8px; }
+    .slide-next { right: 8px; }
+    .slide-counter { text-align: center; font-size: 0.78rem; color: #888; padding: 8px; background: #f8f8f8; }
+
+    /* OTHER SAMPLES */
+    .samples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 32px; }
+    .sample-card { background: var(--grey-bg); border-radius: 6px; overflow: hidden; }
+    .sample-card img { width: 100%; height: 150px; object-fit: cover; display: block; }
+    .sample-card-body { padding: 16px; }
+    .sample-card-body h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+    .sample-card-body p { font-size: 0.8rem; color: #555; margin-bottom: 8px; }
+    .sample-card-body .tags { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+
+    /* CTA */
+    .cta-section { background: var(--black); color: var(--white); text-align: center; padding: 60px 40px; }
+    .cta-section h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 20px; }
+    .btn { display: inline-block; padding: 13px 28px; font-size: 0.88rem; font-weight: 600; text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s; }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    footer { background: var(--black); color: rgba(255,255,255,0.5); text-align: center; padding: 30px 40px; font-size: 0.82rem; }
+    footer img { height: 40px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
+
+    .top-link { font-size: 0.82rem; color: var(--gold); text-decoration: none; display: inline-block; margin-top: 24px; }
+    .top-link:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      nav { flex-wrap: wrap; height: auto; padding: 14px 20px; gap: 10px; }
+      .nav-links { gap: 18px; }
+      .proj-body { grid-template-columns: 1fr; }
+      .project { padding: 50px 24px; }
+      .page-hero { padding: 60px 24px 40px; }
+      .quick-links { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="https://natjolyportfolio.com/ws/media-library/d9bf87a20d9e441faf4ca39b59f50702/nj-portfolio-logo-_black-background_zoom.png" alt="NJ Portfolio" />
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="featured-projects.html">Featured Projects</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-phone">0410 341 744</span>
+</nav>
+
+<div class="page-hero">
+  <h1>Featured Projects</h1>
+  <p>Scroll down to read more about each project.</p>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <div class="container">
+    <div class="ql-card">
+      <div class="tag">Lead Statewide Project</div>
+      <h4>NSW Department of Education</h4>
+      <p>Lead Learning Design team through statewide mandatory training implementation</p>
+    </div>
+    <div class="ql-card">
+      <div class="tag">Key Leadership Programs</div>
+      <h4>Virgin Australia Ground Operations</h4>
+      <p>Building leadership skills from the ground up</p>
+    </div>
+    <div class="ql-card">
+      <div class="tag">Culture Conversation Series</div>
+      <h4>QBuild & Dept EPW</h4>
+      <p>Award-winning interactive learning series on workplace culture</p>
+    </div>
+    <div class="ql-card">
+      <div class="tag">OCA App eLearning</div>
+      <h4>QBuild Regional & Delivery Teams</h4>
+      <p>Custom eLearning modules that mirror the app experience</p>
+    </div>
+    <div class="ql-card">
+      <div class="tag">Other Work Samples</div>
+      <h4>Various Clients</h4>
+      <p>A collection of work spanning 20+ years in L&D</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT 1 -->
+<section class="project" id="project1">
+  <div class="container">
+    <p class="eyebrow">Featured Project 1:</p>
+    <h2 class="proj-title">Overhaul Mandatory Training — Statewide Implementation</h2>
+    <p class="proj-org">NSW Department of Education (DoE)</p>
+    <div class="proj-body">
+      <div class="proj-text">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:12px;">Mandatory Training Program</h3>
+        <p>The purpose of this project was to streamline mandatory training to reduce the administrative burden felt by staff in schools, but applied to all DoE staff including corporate, executives, and a wide range of non-teaching staff (over 140,000 end-users).</p>
+        <p>The project received overwhelmingly positive feedback from hundreds of users across the organisation.</p>
+        <h4 style="margin:20px 0 10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);">Key Deliverables</h4>
+        <ul style="list-style:none;">
+          <li style="padding:7px 0;padding-left:20px;position:relative;border-bottom:1px solid #eee;font-size:0.9rem;color:#333;">
+            <span style="position:absolute;left:0;color:var(--gold);">→</span>
+            Reduced duplication to create 8 core mandatory training modules — completion spread over first year of employment
+          </li>
+          <li style="padding:7px 0;padding-left:20px;position:relative;border-bottom:1px solid #eee;font-size:0.9rem;color:#333;">
+            <span style="position:absolute;left:0;color:var(--gold);">→</span>
+            Delivered 3 × Annual Competency Check (ACC) modules completed annually from year two
+          </li>
+          <li style="padding:7px 0;padding-left:20px;position:relative;border-bottom:1px solid #eee;font-size:0.9rem;color:#333;">
+            <span style="position:absolute;left:0;color:var(--gold);">→</span>
+            Launch of a new Mandatory Training Dashboard
+          </li>
+          <li style="padding:7px 0;padding-left:20px;position:relative;font-size:0.9rem;color:#333;">
+            <span style="position:absolute;left:0;color:var(--gold);">→</span>
+            Release of a Mandatory Training procedure
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="highlights">
+          <h4>Project Highlights</h4>
+          <div class="highlight-item">
+            <strong>Reduced time</strong>
+            <span>Average time spent on mandatory training reduced by 49%</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Increased compliance</strong>
+            <span>Previously at 73% or below — compliance was above 95% within one month of launch</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Quality products</strong>
+            <span>A ServiceNow system received only 5 enquiries statewide, of which only 1 required fixing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slideshow -->
+    <div style="margin-top:36px;">
+      <p style="font-size:0.85rem;color:#666;margin-bottom:12px;">Use the left and right arrows to view feedback received from staff across the organisation:</p>
+      <div class="slideshow" id="slideshow1">
+        <div class="slides" id="slides1">
+          <img src="https://natjolyportfolio.com/ws/media-library/76b971f46e0fd73d9ddbd23c6b04074d/mt2025-feedback_email_corporate.jpg" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/f7a8b3cf933553d4412d85f4651a4b6c/mt2025-feedback_email_principal.jpg" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/c05fcf3f7c6814fbfe3bf0dc79c89f08/mt2025-feedback_facebook_teacher-3.jpg" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/78a19ab9a53368e4cf35ec4073b4dc33/mt2025-feedback_facebook_teacher.jpg" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/dc9186ee400ab2b857e1426d6e2dcff9/mt2025-feedback_facebook_teacher.png" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/fe2380f8597ceab9157b1110cb4d21b0/mt2025-feedback_reddit_teacher-2.png" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/7a1f3fba27aa8b42e7e1b8fb8d2cafe6/mt2025-feedback_teams_acc.png" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/0170911206b96f95fa1501aa9c335401/mt2025-feedback_teams_corporate-2.jpg" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/c7a9257fda5a3cd44dd4bdc36479c021/mt2025-feedback_teams_exec.png" alt="Feedback" />
+          <img src="https://natjolyportfolio.com/ws/media-library/5d5328bf52e32657528bc5e4a20a6ae4/mt2025-feedback_viva_teacher.png" alt="Feedback" />
+        </div>
+        <button class="slide-btn slide-prev" onclick="slide('slides1', 'counter1', -1)">&#8592;</button>
+        <button class="slide-btn slide-next" onclick="slide('slides1', 'counter1', 1)">&#8594;</button>
+      </div>
+      <div class="slide-counter" id="counter1">1 / 10</div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- PROJECT 2a -->
+<section class="project" id="project2a">
+  <div class="container">
+    <p class="eyebrow">Featured Project 2a:</p>
+    <h2 class="proj-title">The MyPath Program</h2>
+    <p class="proj-org">Virgin Australia — Ground Operations</p>
+    <div class="proj-body">
+      <div class="proj-text">
+        <p>The purpose of this project was to build online learning resources to support the implementation of a custom-built Power App for crew leaders to quickly and easily enter feedback and performance updates.</p>
+        <p>This program was delivered while also working on other programs including Human Factors (Non-Technical Skills), Facilitation skills, and teaching team members how to use Storyline.</p>
+      </div>
+      <div class="proj-img">
+        <img src="https://natjolyportfolio.com/ws/media-library/5fe79b6f63994953aea265fbbe462a65/img_mypath-title.png" alt="MyPath Program" />
+        <p style="font-size:0.78rem;color:#777;margin-top:8px;font-style:italic;">Click the image to view sample materials from the MyPath program.</p>
+      </div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- PROJECT 2b -->
+<section class="project" id="project2b">
+  <div class="container">
+    <p class="eyebrow">Featured Project 2b:</p>
+    <h2 class="proj-title">The Leadership Legacy Program</h2>
+    <p class="proj-org">Virgin Australia — Ground Operations</p>
+    <div class="proj-body">
+      <div class="proj-text">
+        <div class="badge">🏆 Winner — That's Champion Award</div>
+        <p>The purpose of this project was to build leadership skills for front-line leaders across the network. The key question: <em>"You are at the beginning of your career as a leader, but 20 years from now, what do you want people to remember about you as a leader?"</em></p>
+        <p>This project was recognised across Ground Operations and chosen by the General Manager from 14 nominated projects Australia-wide.</p>
+      </div>
+      <div>
+        <div class="highlights">
+          <h4>Project Features</h4>
+          <div class="highlight-item">
+            <strong>Challenges</strong>
+            <span>Limited design software available, complex 24/7 operation, upskilling staff to deliver</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Design Software</strong>
+            <span>Canva, SharePoint, and MS Office — chosen purposefully as tools familiar to those delivering</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Delivery</strong>
+            <span>Program and session guides, handouts, takeaway tools, monthly tasks and tips, coaching and preparation for mid-senior leaders</span>
+          </div>
+        </div>
+        <div class="proj-img" style="margin-top:20px;">
+          <img src="https://natjolyportfolio.com/ws/media-library/a010550ad7eb437385fc8b80db542213/thats-champion-award_oct2019.png" alt="That's Champion Award" />
+        </div>
+      </div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- PROJECT 3 -->
+<section class="project" id="project3">
+  <div class="container">
+    <p class="eyebrow">Featured Project 3:</p>
+    <h2 class="proj-title">Culture Conversation Series</h2>
+    <p class="proj-org">QBuild, Dept Energy &amp; Public Works</p>
+    <div class="proj-body">
+      <div class="proj-text">
+        <div class="badge">🏆 Minister's Excellence Award 2021 — Healthy & Safe Workforce</div>
+        <p>This design project had to communicate to executive leaders, office staff and Tradespersons — all in one eLearning piece — with the aim of getting Tradespersons talking about culture. Challenging? YES! But this project got across the line and won the Minister's Excellence Award.</p>
+        <p>I worked closely with Communications and Legal teams to produce an easy-to-use module in Articulate Rise (with Storyline elements) including downloadable tools and resources to support Managers in having conversations with individual team members, and as a talking point at monthly Toolbox talks.</p>
+      </div>
+      <div>
+        <div class="highlights">
+          <h4>Project Features</h4>
+          <div class="highlight-item">
+            <strong>Challenges</strong>
+            <span>Messaging had to be relatable to all staff, from tradespersons to executives, encouraging sensitive conversations in an environment where 'toughness' is traditionally the norm</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Design Software</strong>
+            <span>Articulate Storyline, Rise, Microsoft Teams and Microsoft Word</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Delivery</strong>
+            <span>Program and session guides, handouts, takeaway tools, coaching of mid-level leaders</span>
+          </div>
+        </div>
+        <div class="proj-img" style="margin-top:20px;">
+          <img src="https://natjolyportfolio.com/ws/media-library/0a6852327b02409bbd1b101a2364ece0/yqgpsbllpz0.jpeg" alt="Culture Conversation Series" />
+        </div>
+      </div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- PROJECT 4 -->
+<section class="project" id="project4">
+  <div class="container">
+    <p class="eyebrow">Featured Project 4:</p>
+    <h2 class="proj-title">The OCA App eLearning</h2>
+    <p class="proj-org">QBuild Regional and Delivery Team</p>
+    <div class="proj-body">
+      <div class="proj-text">
+        <p>QBuild worked with Noggin (Developer) to deliver a customised version of the OCA App — used to record site assessments, particularly useful when no internet is available in a disaster event.</p>
+        <p>I developed an eLearning series allowing learners to access different modules based on whether they use OCA on mobile or PC, incorporating variations for iPhone versus Android users. Storyline was used to create interactions that look and act exactly like the app — learn by doing, complete at your own pace.</p>
+      </div>
+      <div>
+        <div class="highlights">
+          <h4>Project Features</h4>
+          <div class="highlight-item">
+            <strong>Challenges</strong>
+            <span>Incorporating variations to customise the learner experience based on how they view the app and what specific functions they use</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Design Software</strong>
+            <span>Articulate Storyline, internal LMS, SharePoint, and Microsoft Teams</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Delivery</strong>
+            <span>eLearning series via LMS, support resources (User Guides and QRGs) on SharePoint, Microsoft Teams page and chat</span>
+          </div>
+        </div>
+        <div class="proj-img" style="margin-top:20px;">
+          <img src="https://natjolyportfolio.com/ws/media-library/64a403896c2c423b96ed2ca0b937a18e/oca-app2.jpeg" alt="OCA App eLearning" />
+        </div>
+      </div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- OTHER SAMPLES -->
+<section class="project" id="other">
+  <div class="container">
+    <p class="eyebrow">Other work samples</p>
+    <h2 class="proj-title">Other Examples</h2>
+    <p style="color:#555;font-size:0.93rem;margin-bottom:8px;">Below are examples demonstrating my scope across 20+ years in Learning &amp; Development:</p>
+    <div class="samples-grid">
+      <div class="sample-card">
+        <img src="https://natjolyportfolio.com/ws/media-library/1c2aac6537952edeebbde8aa5a5a0484/5ww6x9owor4_dx1404_dy1404_cx513_cy905.jpg" alt="Customised eLearning" />
+        <div class="sample-card-body">
+          <h4>Customised eLearning</h4>
+          <p>Traditional eLearning module built for QBuild to support Trades staff in learning how to use a new app.</p>
+          <div class="tags">Articulate Storyline 360 · Practical examples · Voiceover · PDF Resources</div>
+        </div>
+      </div>
+      <div class="sample-card">
+        <img src="https://natjolyportfolio.com/ws/media-library/2f7a28d9c27987396507360cddeb64c1/img_programming.png" alt="VET Qualification" />
+        <div class="sample-card-body">
+          <h4>VET Qualification Program</h4>
+          <p>Many years experience writing VET programs, mapping core and elective competencies for gov and private clients.</p>
+          <div class="tags">VET qualifications · Course Programming · Course Scheduling</div>
+        </div>
+      </div>
+      <div class="sample-card">
+        <img src="https://natjolyportfolio.com/ws/media-library/bc2b48c3a317dfb667b878dd075dab6d/img_c3g-custom-program.png" alt="Design/Deliver Training" />
+        <div class="sample-card-body">
+          <h4>Design/Deliver Training</h4>
+          <p>Design and delivery of customised programs for a wide range of clients, often with specific support needs.</p>
+          <div class="tags">Design training programs · Customised delivery · ASQA requirements</div>
+        </div>
+      </div>
+      <div class="sample-card">
+        <img src="https://natjolyportfolio.com/ws/media-library/f4e19b4122bd67be1de154b46004f8b8/image011-20191105-083450980.png" alt="Leadership Programs" />
+        <div class="sample-card-body">
+          <h4>Leadership Programs</h4>
+          <p>Design and delivery of blended learning programs focussed on leadership at all levels.</p>
+          <div class="tags">Leadership skills · Blended learning · 30-60-90 day programs</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="top-link">↑ Top of page</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h3>Want to connect?</h3>
+  <a href="https://www.linkedin.com/in/natalie-joly-85975412/" target="_blank" class="btn btn-gold">View my LinkedIn profile</a>
+</section>
+
+<footer>
+  <img src="https://natjolyportfolio.com/ws/media-library/d9bf87a20d9e441faf4ca39b59f50702/nj-portfolio-logo-_black-background_zoom.png" alt="NJ Portfolio Logo" />
+  natjolyportfolio.com
+</footer>
+
+<script>
+  const positions = {};
+  const totals = { slides1: 10 };
+
+  function slide(slidesId, counterId, dir) {
+    if (!positions[slidesId]) positions[slidesId] = 0;
+    const el = document.getElementById(slidesId);
+    const total = el.children.length;
+    positions[slidesId] = (positions[slidesId] + dir + total) % total;
+    el.style.transform = `translateX(-${positions[slidesId] * 100}%)`;
+    document.getElementById(counterId).textContent = `${positions[slidesId] + 1} / ${total}`;
+  }
+</script>
+</body>
+</html>
