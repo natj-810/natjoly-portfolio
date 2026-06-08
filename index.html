@@ -12,8 +12,8 @@
     :root {
       --black: #111111;
       --white: #ffffff;
-      --green: #3c8678;
-      --green-light: #3c8678;
+      --gold: #3c8678;
+      --gold-light: #3c8678;
       --grey-bg: #f5f4f0;
       --grey-mid: #888;
       --section-pad: 80px 40px;
@@ -26,17 +26,17 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: var(--black);
+      background: #3c8678;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 70px;
+      padding: 0 40px; height: 80px;
     }
-    .nav-logo img { height: 48px; object-fit: contain; }
+    .nav-logo img { height: 72px; object-fit: contain; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--gold-light); }
-    .nav-phone { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; }
+    .nav-links a:hover { color: rgba(255,255,255,0.75); }
+    .nav-phone { color: var(--white); font-weight: 600; font-size: 0.9rem; }
     .nav-social { display: flex; gap: 14px; align-items: center; }
-    .nav-social a { color: var(--white); opacity: 0.7; transition: opacity 0.2s; }
+    .nav-social a { color: var(--white); opacity: 0.8; transition: opacity 0.2s; }
     .nav-social a:hover { opacity: 1; }
     .nav-social svg { width: 18px; height: 18px; fill: currentColor; }
 
@@ -53,7 +53,7 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 60% 50%, #2a2a1a 0%, transparent 70%);
+      background: radial-gradient(ellipse at 60% 50%, #1a2a28 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-text { position: relative; }
@@ -65,16 +65,18 @@
       text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s;
       cursor: pointer; border: none;
     }
-    .btn-gold { background: var(--gold); color: var(--black); }
-    .btn-gold:hover { background: var(--gold-light); }
-    .btn-outline { border: 2px solid rgba(255,255,255,0.5); color: var(--white); background: transparent; }
-    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
-    .hero-img { position: relative; display: flex; justify-content: center; }
-    .hero-img img { width: 100%; max-width: 420px; border-radius: 4px; object-fit: cover; }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-gold:hover { background: #2e6b5e; color: var(--white); }
+    .btn-outline { border: 2px solid #3c8678; color: var(--white); background: transparent; }
+    .btn-outline:hover { border-color: #3c8678; background: rgba(60,134,120,0.2); }
+
+    /* Hero images side by side */
+    .hero-img { position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 20px; }
+    .hero-main-img { flex: 1; max-width: 280px; border-radius: 4px; object-fit: cover; }
     .hero-img-profile {
-      position: absolute; bottom: -30px; left: 0;
-      width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
-      border: 4px solid var(--gold); background: var(--black);
+      width: 160px; min-width: 160px; height: 240px;
+      border-radius: 8px; object-fit: cover; object-position: center top;
+      border: 4px solid var(--gold);
     }
 
     /* ── SECTION BASE ── */
@@ -85,12 +87,11 @@
 
     /* ── ABOUT ── */
     .about { background: var(--grey-bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    /* 4 columns in one row */
+    .about-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .about-col h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--gold-light); padding-bottom: 6px; }
     .about-col ul { list-style: none; }
-    .about-col ul li { font-size: 0.88rem; padding: 5px 0; border-bottom: 1px solid #e5e2da; color: #333; }
-    .about-img img { width: 100%; border-radius: 4px; object-fit: cover; }
+    .about-col ul li { font-size: 0.85rem; padding: 5px 0; border-bottom: 1px solid #e5e2da; color: #333; }
     .resume-btn-wrap { margin-top: 32px; }
     .btn-dark { background: var(--black); color: var(--white); }
     .btn-dark:hover { background: #333; }
@@ -111,14 +112,18 @@
     .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 36px; }
     .testi-card {
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(201,168,76,0.25);
+      border: 1px solid rgba(60,134,120,0.35);
       border-radius: 6px; padding: 28px 24px;
     }
     .testi-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 4px; }
     .testi-card .role { font-size: 0.78rem; color: var(--gold-light); margin-bottom: 16px; line-height: 1.4; }
     .testi-card p { font-size: 0.875rem; color: rgba(255,255,255,0.82); line-height: 1.7; }
-    .testi-link { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; }
-    .testi-link:hover { text-decoration: underline; }
+    .testi-link {
+      display: inline-block; padding: 13px 28px; font-size: 0.88rem; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s;
+      background: var(--gold); color: var(--white);
+    }
+    .testi-link:hover { background: #2e6b5e; }
 
     /* ── CONTACT ── */
     .contact { background: var(--grey-bg); }
@@ -151,15 +156,17 @@
     footer img { height: 40px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-cols { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
       nav { flex-wrap: wrap; height: auto; padding: 14px 20px; gap: 10px; }
       .nav-links { gap: 18px; }
-      .hero, .about-grid, .projects-layout, .testi-grid, .contact-layout { grid-template-columns: 1fr; }
+      .hero, .projects-layout, .testi-grid, .contact-layout { grid-template-columns: 1fr; }
       .hero { padding: 60px 24px; }
       .hero-img { margin-top: 40px; }
-      .hero-img-profile { display: none; }
-      section { padding: 60px 24px; }
       .about-cols { grid-template-columns: 1fr; }
+      section { padding: 60px 24px; }
     }
   </style>
 </head>
@@ -201,8 +208,8 @@
     </div>
   </div>
   <div class="hero-img">
-    <img src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Learning illustration" />
     <img class="hero-img-profile" src="https://natjolyportfolio.com/ws/media-library/92e3ceea451046a6bc4df16506e01441/351454507_214269948141727_2704307808983606062_n.jpg" alt="Natalie Joly" />
+    <img class="hero-main-img" src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Learning illustration" />
   </div>
 </section>
 
@@ -211,67 +218,60 @@
   <div class="container">
     <p class="eyebrow">here is a summary of my</p>
     <h2 class="section-title">20+ years in Learning &amp; Development</h2>
-    <div class="about-grid">
-      <div>
-        <div class="about-cols">
-          <div class="about-col">
-            <h4>Industry</h4>
-            <ul>
-              <li>Government, private and non-profit organisations</li>
-              <li>Health &amp; Hospital</li>
-              <li>Aviation</li>
-              <li>Building &amp; Construction</li>
-              <li>VET sector education</li>
-              <li>Disability &amp; Community</li>
-            </ul>
-          </div>
-          <div class="about-col">
-            <h4>Clients / Employers</h4>
-            <ul>
-              <li>NSW Department of Education</li>
-              <li>Virgin Australia</li>
-              <li>QBuild (Dept EPW)</li>
-              <li>CPL (Choice, Passion, Life)</li>
-              <li>eHealth (NSW Health)</li>
-              <li>Toyota Financial Services</li>
-              <li>YourTown</li>
-              <li>NRMA (IAG Group)</li>
-              <li>Thrifty Car Rentals</li>
-            </ul>
-          </div>
-          <div class="about-col">
-            <h4>Design Tools</h4>
-            <ul>
-              <li>Articulate 360 (Storyline, Rise, Peek)</li>
-              <li>Captivate</li>
-              <li>Camtasia</li>
-              <li>VideoScribe / Vyond</li>
-              <li>Filmora / Wondershare</li>
-              <li>SharePoint</li>
-              <li>Numerous in-house LMS systems</li>
-            </ul>
-          </div>
-          <div class="about-col">
-            <h4>Design &amp; Delivery Skillset</h4>
-            <ul>
-              <li>Detailed Training Needs Analysis</li>
-              <li>SME &amp; Specialist Consultation</li>
-              <li>Design scope of learning projects</li>
-              <li>Storyboarding</li>
-              <li>Program and session design</li>
-              <li>Delivery to small and large groups</li>
-              <li>VET delivery and assessment</li>
-              <li>Program evaluation</li>
-            </ul>
-          </div>
-        </div>
-        <div class="resume-btn-wrap">
-          <a href="https://natjolyportfolio.com/ws/media-library/e1132ad87e7193477ea54891655328bd/natalie-joly-resume_aug2025.pdf" class="btn btn-dark" target="_blank">Download my Resume</a>
-        </div>
+    <div class="about-cols">
+      <div class="about-col">
+        <h4>Industry</h4>
+        <ul>
+          <li>Government, private and non-profit organisations</li>
+          <li>Health &amp; Hospital</li>
+          <li>Aviation</li>
+          <li>Building &amp; Construction</li>
+          <li>VET sector education</li>
+          <li>Disability &amp; Community</li>
+        </ul>
       </div>
-      <div class="about-img">
-        <img src="https://natjolyportfolio.com/ws/blocks/about-splitscreen-with-media/images/image-1.ws-intense-next-private-tutor.jpg" alt="Learning & Development" />
+      <div class="about-col">
+        <h4>Clients / Employers</h4>
+        <ul>
+          <li>NSW Department of Education</li>
+          <li>Virgin Australia</li>
+          <li>QBuild (Dept EPW)</li>
+          <li>CPL (Choice, Passion, Life)</li>
+          <li>eHealth (NSW Health)</li>
+          <li>Toyota Financial Services</li>
+          <li>YourTown</li>
+          <li>NRMA (IAG Group)</li>
+          <li>Thrifty Car Rentals</li>
+        </ul>
       </div>
+      <div class="about-col">
+        <h4>Design Tools</h4>
+        <ul>
+          <li>Articulate 360 (Storyline, Rise, Peek)</li>
+          <li>Captivate</li>
+          <li>Camtasia</li>
+          <li>VideoScribe / Vyond</li>
+          <li>Filmora / Wondershare</li>
+          <li>SharePoint</li>
+          <li>Numerous in-house LMS systems</li>
+        </ul>
+      </div>
+      <div class="about-col">
+        <h4>Design &amp; Delivery Skillset</h4>
+        <ul>
+          <li>Detailed Training Needs Analysis</li>
+          <li>SME &amp; Specialist Consultation</li>
+          <li>Design scope of learning projects</li>
+          <li>Storyboarding</li>
+          <li>Program and session design</li>
+          <li>Delivery to small and large groups</li>
+          <li>VET delivery and assessment</li>
+          <li>Program evaluation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="resume-btn-wrap">
+      <a href="https://natjolyportfolio.com/ws/media-library/e1132ad87e7193477ea54891655328bd/natalie-joly-resume_aug2025.pdf" class="btn btn-gold" target="_blank">Download my Resume</a>
     </div>
   </div>
 </section>
@@ -293,7 +293,7 @@
         <a href="featured-projects.html" class="btn btn-gold">Featured Projects</a>
       </div>
       <div class="projects-img">
-        <img src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Projects" />
+        <img src="https://natjolyportfolio.com/ws/blocks/about-splitscreen-with-media/images/image-1.ws-intense-next-private-tutor.jpg" alt="Learning & Development" />
       </div>
     </div>
   </div>
