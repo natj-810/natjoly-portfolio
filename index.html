@@ -70,13 +70,16 @@
     .btn-outline { border: 2px solid #3c8678; color: var(--white); background: transparent; }
     .btn-outline:hover { border-color: #3c8678; background: rgba(60,134,120,0.2); }
 
-    /* Hero images side by side */
-    .hero-img { position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 20px; }
-    .hero-main-img { flex: 1; max-width: 280px; border-radius: 4px; object-fit: cover; }
+    /* Hero images - graphic behind, portrait overlapping front-left slightly lower */
+    .hero-img { position: relative; display: flex; justify-content: flex-end; align-items: flex-start; }
+    .hero-main-img { width: 100%; max-width: 380px; border-radius: 4px; object-fit: cover; display: block; }
     .hero-img-profile {
-      width: 160px; min-width: 160px; height: 240px;
+      position: absolute; top: 70px; left: 0px;
+      width: 160px; height: 230px;
       border-radius: 8px; object-fit: cover; object-position: center top;
       border: 4px solid var(--gold);
+      box-shadow: 6px 6px 20px rgba(0,0,0,0.5);
+      z-index: 2;
     }
 
     /* ── SECTION BASE ── */
@@ -208,8 +211,8 @@
     </div>
   </div>
   <div class="hero-img">
-    <img class="hero-img-profile" src="https://natjolyportfolio.com/ws/media-library/92e3ceea451046a6bc4df16506e01441/351454507_214269948141727_2704307808983606062_n.jpg" alt="Natalie Joly" />
     <img class="hero-main-img" src="https://natjolyportfolio.com/ws/media-library/791d3a132a3e4f4383e99cd99092b530/img_learning.png" alt="Learning illustration" />
+    <img class="hero-img-profile" src="https://natjolyportfolio.com/ws/media-library/92e3ceea451046a6bc4df16506e01441/351454507_214269948141727_2704307808983606062_n.jpg" alt="Natalie Joly" />
   </div>
 </section>
 
