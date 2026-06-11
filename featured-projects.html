@@ -9,30 +9,44 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #111111; --white: #ffffff; --green: #3c8678; --green: #3c8678;
+      --black: #111111; --white: #ffffff; --gold: #3c8678; --gold-light: #3c8678;
       --grey-bg: #f5f4f0; --max-w: 1000px;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; color: var(--black); background: var(--white); line-height: 1.7; }
 
+    /* ── NAV — matches home page ── */
     nav {
-      position: sticky; top: 0; z-index: 100; background: var(--black);
+      position: sticky; top: 0; z-index: 100; background: #3c8678;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 70px;
+      padding: 0 40px; height: 80px;
     }
-    .nav-logo img { height: 48px; }
+    .nav-logo img { height: 72px; object-fit: contain; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--gold-light); }
-    .nav-phone { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; }
+    .nav-links a:hover { color: rgba(255,255,255,0.75); }
+    .nav-phone { color: var(--white); font-weight: 600; font-size: 0.9rem; }
+    .nav-social { display: flex; gap: 14px; align-items: center; }
+    .nav-social a { color: var(--white); opacity: 0.8; transition: opacity 0.2s; }
+    .nav-social a:hover { opacity: 1; }
+    .nav-social svg { width: 18px; height: 18px; fill: currentColor; }
 
-    /* HERO BANNER */
+    /* ── PAGE HERO BANNER — matches home page style ── */
     .page-hero {
       background: var(--black); color: var(--white);
-      padding: 80px 40px 60px; text-align: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 100px 40px; min-height: 260px;
+      position: relative;
     }
-    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
-    .page-hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, #1a2a28 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner { position: relative; max-width: 1100px; width: 100%; margin: 0 auto; }
+    .page-hero .hero-sub { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; margin-bottom: 14px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 0; }
+    .page-hero p.sub { color: rgba(255,255,255,0.65); font-size: 0.95rem; margin-top: 12px; }
 
     /* QUICK LINKS */
     .quick-links { background: var(--grey-bg); padding: 40px; }
@@ -47,10 +61,20 @@
     .project:nth-child(even) { background: var(--grey-bg); }
     .container { max-width: var(--max-w); margin: 0 auto; }
     .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.72rem; font-weight: 700; margin-bottom: 8px; }
-    h2.proj-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 4px; }
+
+    /* Project title now teal */
+    h2.proj-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 4px; color: #3c8678; }
     .proj-org { color: #666; font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
+
+    /* Standard 2-col layout for projects 1 & 2a */
     .proj-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    .proj-body.full { grid-template-columns: 1fr; }
+
+    /* Stacked layout for projects 2b, 3, 4: text on left, image top-right, highlights below text */
+    .proj-body-stacked { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 32px 48px; align-items: start; }
+    .proj-body-stacked .proj-text  { grid-column: 1; grid-row: 1; }
+    .proj-body-stacked .proj-img   { grid-column: 2; grid-row: 1; }
+    .proj-body-stacked .highlights { grid-column: 1; grid-row: 2; }
+
     .proj-text p { color: #444; margin-bottom: 14px; font-size: 0.93rem; }
     .highlights { background: var(--black); color: var(--white); border-radius: 6px; padding: 28px; }
     .highlights h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 16px; font-weight: 700; }
@@ -58,7 +82,7 @@
     .highlight-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .highlight-item strong { display: block; font-size: 0.88rem; color: var(--gold-light); margin-bottom: 4px; }
     .highlight-item span { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
-    .badge { display: inline-block; background: var(--gold); color: var(--black); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .badge { display: inline-block; background: var(--gold); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
     .proj-img { border-radius: 6px; overflow: hidden; }
     .proj-img img { width: 100%; display: block; border-radius: 6px; }
 
@@ -72,7 +96,7 @@
       padding: 12px 16px; cursor: pointer; font-size: 1.1rem; border-radius: 3px;
       transition: background 0.2s;
     }
-    .slide-btn:hover { background: var(--gold); color: var(--black); }
+    .slide-btn:hover { background: var(--gold); color: var(--white); }
     .slide-prev { left: 8px; }
     .slide-next { right: 8px; }
     .slide-counter { text-align: center; font-size: 0.78rem; color: #888; padding: 8px; background: #f8f8f8; }
@@ -89,22 +113,31 @@
     /* CTA */
     .cta-section { background: var(--black); color: var(--white); text-align: center; padding: 60px 40px; }
     .cta-section h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 20px; }
-    .btn { display: inline-block; padding: 13px 28px; font-size: 0.88rem; font-weight: 600; text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s; }
-    .btn-gold { background: var(--gold); color: var(--black); }
-    .btn-gold:hover { background: var(--gold-light); }
+    .btn { display: inline-block; padding: 13px 28px; font-size: 0.88rem; font-weight: 600; text-decoration: none; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-gold { background: #3c8678; color: var(--white); }
+    .btn-gold:hover { background: #2e6b5e; color: var(--white); }
 
     footer { background: var(--black); color: rgba(255,255,255,0.5); text-align: center; padding: 30px 40px; font-size: 0.82rem; }
     footer img { height: 40px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
 
-    .top-link { font-size: 0.82rem; color: var(--gold); text-decoration: none; display: inline-block; margin-top: 24px; }
-    .top-link:hover { text-decoration: underline; }
+    /* Top of page link — now styled as a button */
+    .top-link {
+      display: inline-block; margin-top: 28px;
+      padding: 10px 22px; font-size: 0.82rem; font-weight: 600;
+      background: #3c8678; color: var(--white);
+      text-decoration: none; border-radius: 3px; letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .top-link:hover { background: #2e6b5e; }
 
     @media (max-width: 768px) {
       nav { flex-wrap: wrap; height: auto; padding: 14px 20px; gap: 10px; }
       .nav-links { gap: 18px; }
-      .proj-body { grid-template-columns: 1fr; }
+      .proj-body, .proj-body-stacked { grid-template-columns: 1fr; }
+      .proj-body-stacked .proj-img { grid-column: 1; grid-row: 2; }
+      .proj-body-stacked .highlights { grid-row: 3; }
       .project { padding: 50px 24px; }
-      .page-hero { padding: 60px 24px 40px; }
+      .page-hero { padding: 60px 24px; }
       .quick-links { padding: 30px 24px; }
     }
   </style>
@@ -122,11 +155,25 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <span class="nav-phone">0410 341 744</span>
+  <div class="nav-social">
+    <a href="https://www.linkedin.com/in/natalie-joly-85975412/" target="_blank" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452H16.89v-5.569c0-1.327-.024-3.037-1.851-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.348V9h3.414v1.561h.048c.476-.9 1.637-1.851 3.368-1.851 3.6 0 4.267 2.369 4.267 5.455v6.287zM5.337 7.433a1.983 1.983 0 1 1 0-3.966 1.983 1.983 0 0 1 0 3.966zm1.707 13.019H3.63V9h3.414v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/natalie.joly1" target="_blank" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    </a>
+    <a href="mailto:njoly2@bigpond.com" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
 </nav>
 
 <div class="page-hero">
-  <h1>Featured Projects</h1>
-  <p>Scroll down to read more about each project.</p>
+  <div class="page-hero-inner">
+    <p class="hero-sub">a selection of my best work</p>
+    <h1>Featured Projects</h1>
+    <p class="sub">Scroll down to read more about each project.</p>
+  </div>
 </div>
 
 <!-- QUICK LINKS -->
@@ -209,7 +256,6 @@
         </div>
       </div>
     </div>
-    <!-- Slideshow -->
     <div style="margin-top:36px;">
       <p style="font-size:0.85rem;color:#666;margin-bottom:12px;">Use the left and right arrows to view feedback received from staff across the organisation:</p>
       <div class="slideshow" id="slideshow1">
@@ -247,7 +293,6 @@
       </div>
       <div class="proj-img">
         <img src="https://natjolyportfolio.com/ws/media-library/5fe79b6f63994953aea265fbbe462a65/img_mypath-title.png" alt="MyPath Program" />
-        <p style="font-size:0.78rem;color:#777;margin-top:8px;font-style:italic;">Click the image to view sample materials from the MyPath program.</p>
       </div>
     </div>
     <a href="#" class="top-link">↑ Top of page</a>
@@ -260,30 +305,28 @@
     <p class="eyebrow">Featured Project 2b:</p>
     <h2 class="proj-title">The Leadership Legacy Program</h2>
     <p class="proj-org">Virgin Australia — Ground Operations</p>
-    <div class="proj-body">
+    <div class="proj-body-stacked">
       <div class="proj-text">
         <div class="badge">🏆 Winner — That's Champion Award</div>
         <p>The purpose of this project was to build leadership skills for front-line leaders across the network. The key question: <em>"You are at the beginning of your career as a leader, but 20 years from now, what do you want people to remember about you as a leader?"</em></p>
         <p>This project was recognised across Ground Operations and chosen by the General Manager from 14 nominated projects Australia-wide.</p>
       </div>
-      <div>
-        <div class="highlights">
-          <h4>Project Features</h4>
-          <div class="highlight-item">
-            <strong>Challenges</strong>
-            <span>Limited design software available, complex 24/7 operation, upskilling staff to deliver</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Design Software</strong>
-            <span>Canva, SharePoint, and MS Office — chosen purposefully as tools familiar to those delivering</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Delivery</strong>
-            <span>Program and session guides, handouts, takeaway tools, monthly tasks and tips, coaching and preparation for mid-senior leaders</span>
-          </div>
+      <div class="proj-img">
+        <img src="https://natjolyportfolio.com/ws/media-library/a010550ad7eb437385fc8b80db542213/thats-champion-award_oct2019.png" alt="That's Champion Award" />
+      </div>
+      <div class="highlights">
+        <h4>Project Features</h4>
+        <div class="highlight-item">
+          <strong>Challenges</strong>
+          <span>Limited design software available, complex 24/7 operation, upskilling staff to deliver</span>
         </div>
-        <div class="proj-img" style="margin-top:20px;">
-          <img src="https://natjolyportfolio.com/ws/media-library/a010550ad7eb437385fc8b80db542213/thats-champion-award_oct2019.png" alt="That's Champion Award" />
+        <div class="highlight-item">
+          <strong>Design Software</strong>
+          <span>Canva, SharePoint, and MS Office — chosen purposefully as tools familiar to those delivering</span>
+        </div>
+        <div class="highlight-item">
+          <strong>Delivery</strong>
+          <span>Program and session guides, handouts, takeaway tools, monthly tasks and tips, coaching and preparation for mid-senior leaders</span>
         </div>
       </div>
     </div>
@@ -297,30 +340,28 @@
     <p class="eyebrow">Featured Project 3:</p>
     <h2 class="proj-title">Culture Conversation Series</h2>
     <p class="proj-org">QBuild, Dept Energy &amp; Public Works</p>
-    <div class="proj-body">
+    <div class="proj-body-stacked">
       <div class="proj-text">
-        <div class="badge">🏆 Minister's Excellence Award 2021 — Healthy & Safe Workforce</div>
+        <div class="badge">🏆 Minister's Excellence Award 2021 — Healthy &amp; Safe Workforce</div>
         <p>This design project had to communicate to executive leaders, office staff and Tradespersons — all in one eLearning piece — with the aim of getting Tradespersons talking about culture. Challenging? YES! But this project got across the line and won the Minister's Excellence Award.</p>
         <p>I worked closely with Communications and Legal teams to produce an easy-to-use module in Articulate Rise (with Storyline elements) including downloadable tools and resources to support Managers in having conversations with individual team members, and as a talking point at monthly Toolbox talks.</p>
       </div>
-      <div>
-        <div class="highlights">
-          <h4>Project Features</h4>
-          <div class="highlight-item">
-            <strong>Challenges</strong>
-            <span>Messaging had to be relatable to all staff, from tradespersons to executives, encouraging sensitive conversations in an environment where 'toughness' is traditionally the norm</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Design Software</strong>
-            <span>Articulate Storyline, Rise, Microsoft Teams and Microsoft Word</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Delivery</strong>
-            <span>Program and session guides, handouts, takeaway tools, coaching of mid-level leaders</span>
-          </div>
+      <div class="proj-img">
+        <img src="https://natjolyportfolio.com/ws/media-library/0a6852327b02409bbd1b101a2364ece0/yqgpsbllpz0.jpeg" alt="Culture Conversation Series" />
+      </div>
+      <div class="highlights">
+        <h4>Project Features</h4>
+        <div class="highlight-item">
+          <strong>Challenges</strong>
+          <span>Messaging had to be relatable to all staff, from tradespersons to executives, encouraging sensitive conversations in an environment where 'toughness' is traditionally the norm</span>
         </div>
-        <div class="proj-img" style="margin-top:20px;">
-          <img src="https://natjolyportfolio.com/ws/media-library/0a6852327b02409bbd1b101a2364ece0/yqgpsbllpz0.jpeg" alt="Culture Conversation Series" />
+        <div class="highlight-item">
+          <strong>Design Software</strong>
+          <span>Articulate Storyline, Rise, Microsoft Teams and Microsoft Word</span>
+        </div>
+        <div class="highlight-item">
+          <strong>Delivery</strong>
+          <span>Program and session guides, handouts, takeaway tools, coaching of mid-level leaders</span>
         </div>
       </div>
     </div>
@@ -334,29 +375,27 @@
     <p class="eyebrow">Featured Project 4:</p>
     <h2 class="proj-title">The OCA App eLearning</h2>
     <p class="proj-org">QBuild Regional and Delivery Team</p>
-    <div class="proj-body">
+    <div class="proj-body-stacked">
       <div class="proj-text">
         <p>QBuild worked with Noggin (Developer) to deliver a customised version of the OCA App — used to record site assessments, particularly useful when no internet is available in a disaster event.</p>
         <p>I developed an eLearning series allowing learners to access different modules based on whether they use OCA on mobile or PC, incorporating variations for iPhone versus Android users. Storyline was used to create interactions that look and act exactly like the app — learn by doing, complete at your own pace.</p>
       </div>
-      <div>
-        <div class="highlights">
-          <h4>Project Features</h4>
-          <div class="highlight-item">
-            <strong>Challenges</strong>
-            <span>Incorporating variations to customise the learner experience based on how they view the app and what specific functions they use</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Design Software</strong>
-            <span>Articulate Storyline, internal LMS, SharePoint, and Microsoft Teams</span>
-          </div>
-          <div class="highlight-item">
-            <strong>Delivery</strong>
-            <span>eLearning series via LMS, support resources (User Guides and QRGs) on SharePoint, Microsoft Teams page and chat</span>
-          </div>
+      <div class="proj-img">
+        <img src="https://natjolyportfolio.com/ws/media-library/64a403896c2c423b96ed2ca0b937a18e/oca-app2.jpeg" alt="OCA App eLearning" />
+      </div>
+      <div class="highlights">
+        <h4>Project Features</h4>
+        <div class="highlight-item">
+          <strong>Challenges</strong>
+          <span>Incorporating variations to customise the learner experience based on how they view the app and what specific functions they use</span>
         </div>
-        <div class="proj-img" style="margin-top:20px;">
-          <img src="https://natjolyportfolio.com/ws/media-library/64a403896c2c423b96ed2ca0b937a18e/oca-app2.jpeg" alt="OCA App eLearning" />
+        <div class="highlight-item">
+          <strong>Design Software</strong>
+          <span>Articulate Storyline, internal LMS, SharePoint, and Microsoft Teams</span>
+        </div>
+        <div class="highlight-item">
+          <strong>Delivery</strong>
+          <span>eLearning series via LMS, support resources (User Guides and QRGs) on SharePoint, Microsoft Teams page and chat</span>
         </div>
       </div>
     </div>
@@ -421,8 +460,6 @@
 
 <script>
   const positions = {};
-  const totals = { slides1: 10 };
-
   function slide(slidesId, counterId, dir) {
     if (!positions[slidesId]) positions[slidesId] = 0;
     const el = document.getElementById(slidesId);
